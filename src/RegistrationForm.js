@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class LoginForm extends React.Component {
+class RegistrationForm extends React.Component {
     state = {
-        username: 'cardy',
-        password: 'cheese123'
+        username: '',
+        password: '',
+        email: ''
     };
 
     handle_change = e => {
@@ -20,7 +21,7 @@ class LoginForm extends React.Component {
     render() {
         return (
             <form onSubmit={e => this.props.handle_login(e, this.state)}>
-                <h4>Login</h4>
+                <h4>Register</h4>
                 <label htmlFor="username">Username</label>
                 <input
                     type="text"
@@ -37,6 +38,14 @@ class LoginForm extends React.Component {
                     onChange={this.handle_change}
                 />
                 <br></br>
+                <label htmlFor="email">Email</label>
+                <input
+                    type="text"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.handle_change}
+                />
+                <br></br>
                 <input type="submit" />
 
             </form>
@@ -44,8 +53,8 @@ class LoginForm extends React.Component {
     }
 }
 
-export default LoginForm;
+export default RegistrationForm;
 
-LoginForm.propTypes = {
+RegistrationForm.propTypes = {
     handle_login: PropTypes.func.isRequired
 };
