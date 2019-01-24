@@ -12,6 +12,7 @@ const Home = () => (
     </div>
 );
 
+// TODO: Figure out what this props thing is doing. Its definitely important...
 const renderMergedProps = (component, ...rest) => {
     const finalProps = Object.assign({}, ...rest);
     return (
@@ -34,7 +35,8 @@ class App extends Component {
         this.state = {
             displayed_form: '',
             logged_in: !!localStorage.getItem('token'),
-            username: ''
+            username: '',
+            user_id: -1
         };
     }
 
@@ -78,8 +80,31 @@ class App extends Component {
                     displayed_form: '',
                     username: username
                 });
+            })
+            .then(temp => {
+                fetch('http://localhost:8000/user/', {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Token ${localStorage.getItem('token')}`
+                    },
+                })
+                    .then(res => res.json())
+                    .then(json => {
+                        this.setState({user_id: json[0]['id']});
+                        let url = 'http://localhost:8000/profile/' + json[0]['id'] + '/';
+                        fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                Authorization: `Token ${localStorage.getItem('token')}`
+                            },
+                        })
+                            .then(res => res.json())
+                            .then(json => {
+                                localStorage.setItem('is_goalie', json['is_goalie']);
+                            })
+                    })
             });
-    };
+    }; // End handle_login
 
     // render() {
     //     let form;

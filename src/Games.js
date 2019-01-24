@@ -19,6 +19,8 @@ class Games extends React.Component {
         })
             .then(res => res.json())
             .then(json => {
+                console.log("GAMES");
+                console.log(json);
                 this.setState({ games: json });
                 this.getRows();
             });
@@ -58,6 +60,9 @@ class Games extends React.Component {
                 table[i].push(this.state['games'][i]['skill_level']);
                 table[i].push(this.state['games'][i]['location']);
                 table[i].push(this.state['games'][i]['game_time']);
+                // if (localStorage.getItem('is_goalie') === 'true') {
+                    table[i].push('TEMP');
+                // }
 
                 this.getLocation(this.state['games'][i]['location'])
                     .then(([location]) => {
@@ -69,12 +74,25 @@ class Games extends React.Component {
     };
 
     render() {
-        const headings = [
-            'User',
-            'Skill Level',
-            'Location',
-            'Time'
-        ];
+        var headings = [];
+        if (localStorage.getItem('is_goalie') === 'true') {
+            headings = [
+                'User',
+                'Skill Level',
+                'Location',
+                'Time',
+                'Play!'
+            ];
+        }
+        else {
+            headings = [
+                'User',
+                'Skill Level',
+                'Location',
+                'Time'
+            ];
+        }
+
 
         return (
             <DataTable headings={headings} rows={this.state['rows']} />
