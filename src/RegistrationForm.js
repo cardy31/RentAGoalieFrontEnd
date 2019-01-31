@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class RegistrationForm extends React.Component {
     state = {
@@ -18,9 +17,34 @@ class RegistrationForm extends React.Component {
         });
     };
 
+    handle_register(e, data) {
+        e.preventDefault();
+
+        let body = {
+            "username": data["username"],
+            "password": data["password"],
+            "email": data["email"]
+        };
+        let url = "http://localhost:8000/user/";
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+
+                this.props.history.push("/login");
+            })
+
+    }
+
     render() {
         return (
-            <form onSubmit={e => this.props.handle_login(e, this.state)}>
+            <form onSubmit={e => this.handle_register(e, this.state)}>
                 <h4>Register</h4>
                 <label htmlFor="username">Username</label>
                 <input
@@ -46,6 +70,7 @@ class RegistrationForm extends React.Component {
                     onChange={this.handle_change}
                 />
                 <br></br>
+
                 <input type="submit" />
 
             </form>
@@ -54,7 +79,3 @@ class RegistrationForm extends React.Component {
 }
 
 export default RegistrationForm;
-
-RegistrationForm.propTypes = {
-    handle_login: PropTypes.func.isRequired
-};

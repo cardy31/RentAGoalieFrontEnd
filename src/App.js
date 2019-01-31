@@ -2,17 +2,14 @@ import { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import React from 'react';
-import Games from './Games';
+import RegistrationForm from "./RegistrationForm";
+import { withRouter } from "react-router";
+import PropTypes from "prop-types";
+import Home from "./Home";
+import Goalie from "./Goalie";
+import Renter from "./Renter";
 
-/* Home component */
-const Home = () => (
-    <div>
-        <h2>Home</h2>
-        <p>Welcome to Rent A Goalie! We have goalies, you have nets. Lets put them together!</p>
-    </div>
-);
 
-// TODO: Figure out what this props thing is doing. Its definitely important...
 const renderMergedProps = (component, ...rest) => {
     const finalProps = Object.assign({}, ...rest);
     return (
@@ -36,28 +33,17 @@ class App extends Component {
             displayed_form: '',
             logged_in: !!localStorage.getItem('token'),
             username: '',
-            user_id: -1
+            user_id: -1,
+            match: PropTypes.object.isRequired,
+            location: PropTypes.object.isRequired,
+            history: PropTypes.object.isRequired
         };
     }
 
-    // Get the username if we already have a token stored
-    // componentDidMount() {
-    //     if (this.state.logged_in) {
-    //         // TODO: Fix this for a different endpoint
-    //         fetch('http://localhost:8000/core/current_user/', {
-    //             headers: {
-    //                 Authorization: `JWT ${localStorage.getItem('token')}`
-    //             }
-    //         })
-    //             .then(res => res.json())
-    //             .then(json => {
-    //                 this.setState({ username: json.username });
-    //             });
-    //     }
-    // }
-
     handle_logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('is_goalie');
+        localStorage.removeItem('user_id');
         this.setState({ logged_in: false, username: '' });
     };
 
@@ -80,8 +66,6 @@ class App extends Component {
                     displayed_form: '',
                     username: username
                 });
-            })
-            .then(temp => {
                 fetch('http://localhost:8000/user/', {
                     method: 'GET',
                     headers: {
@@ -90,8 +74,10 @@ class App extends Component {
                 })
                     .then(res => res.json())
                     .then(json => {
+                        console.log(json[0]);
                         this.setState({user_id: json[0]['id']});
-                        let url = 'http://localhost:8000/profile/' + json[0]['id'] + '/';
+                        localStorage.setItem('user_id', json[0]['id']);
+                        let url = 'http://localhost:8000/game/';
                         fetch(url, {
                             method: 'GET',
                             headers: {
@@ -100,77 +86,48 @@ class App extends Component {
                         })
                             .then(res => res.json())
                             .then(json => {
-                                localStorage.setItem('is_goalie', json['is_goalie']);
+                                localStorage.setItem('games', json);
+                                let url = 'http://localhost:8000/profile/' + json[0]['id'] + '/';
+                                fetch(url, {
+                                    method: 'GET',
+                                    headers: {
+                                        Authorization: `Token ${localStorage.getItem('token')}`
+                                    },
+                                })
+                                    .then(res => res.json())
+                                    .then(json => {
+                                        localStorage.setItem('is_goalie', json['is_goalie']);
+                                        console.log(json['is_goalie']);
+                                        console.log(json);
+                                        this.render()
+                                    });
                             })
                     })
-            });
+            })
     }; // End handle_login
-
-    // render() {
-    //     let form;
-    //     switch (this.state.displayed_form) {
-    //         case 'login':
-    //             form = <LoginForm handle_login={this.handle_login} />;
-    //             break;
-    //         // case 'signup':
-    //         //     form = <SignupForm handle_signup={this.handle_signup} />;
-    //         //     break;
-    //         default:
-    //             form = null;
-    //     }
-    //
-    //     return (
-    //         <div className="App">
-    //             <Nav
-    //                 logged_in={this.state.logged_in}
-    //                 display_form={this.display_form}
-    //                 handle_logout={this.handle_logout}
-    //             />
-    //             {form}
-    //             <h3>
-    //                 {this.state.logged_in
-    //                     ? `Hello, ${this.state.username}`
-    //                     : 'Please Log In'}
-    //             </h3>
-    //         </div>
-    //     );
-    // }
 
 
     render() {
-        // let form;
-        // switch (this.state.displayed_form) {
-        //     case 'login':
-        //         form = <LoginForm handle_login={this.handle_login} />;
-        //         break;
-        //     // case 'signup':
-        //     //     form = <SignupForm handle_signup={this.handle_signup} />;
-        //     //     break;
-        //     default:
-        //         form = null;
-        // }
-
         console.log(this.state);
         console.log(localStorage.getItem("token"));
 
         if (this.state['logged_in'] === true) {
-            return (
-                <div>
-                    <nav className="navbar navbar-light">
-                        <ul className="nav navbar-nav">
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/games">Games</Link></li>
-                            <li onClick={this.handle_logout}>Logout</li>
-
-                        </ul>
-                    </nav>
-
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/games" component={Games}/>
-                    <PropsRoute path="/login" component={LoginForm} handle_login={this.handle_login}/>
-                </div>
-            )
+            if (localStorage.getItem('is_goalie') === 'true'){
+                return (
+                    <div>
+                        <Goalie handle_logout={this.handle_logout}/>
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div>
+                        <Renter handle_logout={this.handle_logout}/>
+                    </div>
+                )
+            }
         }
+        // Not logged in
         else {
             return (
                 <div>
@@ -178,11 +135,13 @@ class App extends Component {
                         <ul className="nav navbar-nav">
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/login">Login</Link></li>
+                            <li><Link to="/register">Register</Link></li>
                         </ul>
                     </nav>
 
                     <Route exact path="/" component={Home}/>
                     <PropsRoute path="/login" component={LoginForm} handle_login={this.handle_login}/>
+                    <PropsRoute path="/register" component={RegistrationForm}/>
 
                 </div>
             )
@@ -190,6 +149,4 @@ class App extends Component {
     }
 }
 
-
-
-export default App;
+export default withRouter(App);
