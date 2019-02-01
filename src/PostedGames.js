@@ -42,7 +42,13 @@ class PostedGames extends React.Component {
                     table[i].push(this.state['games'][i]['skill_level']);
                     table[i].push(this.state['games'][i]['location']);
                     table[i].push(this.state['games'][i]['game_time']);
-                    table[i].push("Heck yes");
+                    if (this.state['games'][i]['goalie_one'] !== null) {
+                        table[i].push("Yes");
+                    }
+                    else {
+                        table[i].push("No");
+                    }
+
                     table[i].push(<button value={this.state['games'][i]['id']}
                                           onClick={this.handle_cancel}>Cancel</button>);
                 }

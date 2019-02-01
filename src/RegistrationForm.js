@@ -43,6 +43,7 @@ class RegistrationForm extends React.Component {
     }
 
     render() {
+        // TODO: Add "Is Goalie" checkbox
         return (
             <form onSubmit={e => this.handle_register(e, this.state)}>
                 <h4>Register</h4>

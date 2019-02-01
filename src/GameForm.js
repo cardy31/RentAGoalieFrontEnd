@@ -2,35 +2,12 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import GOOGLE_MAPS_KEY from "./Keys.js"
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { withRouter } from "react-router";
-import MapComponent from "./MapComponent"
 
-let reader = new FileReader();
-let key = readTextFile("file:///Users/cardy/PhpstormProjects/rent_a_goalie/src/GoogleMapsAPIKey.txt");
-
-console.log(key);
-
-function readTextFile(file)
-{
-    let rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status === 0)
-            {
-                let allText = rawFile.responseText;
-                alert(allText);
-            }
-        }
-    };
-    rawFile.send(null);
-}
-
-let mapsUrl = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=" + key;
+let mapsUrl = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=" + GOOGLE_MAPS_KEY;
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     <GoogleMap googleMapURL={mapsUrl}
@@ -93,7 +70,7 @@ class GameForm extends React.Component {
         addressString = addressString.replace(" ", "+");
         console.log(addressString);
         let urlString = "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-            addressString + "&key=" + key;
+            addressString + "&key=" + GOOGLE_MAPS_KEY;
         fetch(urlString)
             .then(res => res.json())
             .then(json => {
