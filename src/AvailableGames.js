@@ -41,7 +41,8 @@ class AvailableGames extends React.Component {
                 table[i].push(this.state['games'][i]['skill_level']);
                 table[i].push(this.state['games'][i]['location']);
                 table[i].push(this.state['games'][i]['game_time']);
-                table[i].push(<button value={this.state['games'][i]['id']}
+                table[i].push(<button className="btn btn-secondary"
+                                      value={this.state['games'][i]['id']}
                                       onClick={this.handle_play}>Play</button>);
             }
         }
@@ -104,7 +105,10 @@ class AvailableGames extends React.Component {
         ];
 
         return (
-            <DataTable headings={headings} rows={this.state['rows']} />
+            <div className="container">
+                <h1>Find a Game</h1>
+                <DataTable headings={headings} rows={this.state['rows']} />
+            </div>
         );
     }
 }

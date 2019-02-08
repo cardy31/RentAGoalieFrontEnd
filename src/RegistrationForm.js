@@ -4,7 +4,8 @@ class RegistrationForm extends React.Component {
     state = {
         username: '',
         password: '',
-        email: ''
+        email: '',
+        is_goalie: true
     };
 
     handle_change = e => {
@@ -17,13 +18,44 @@ class RegistrationForm extends React.Component {
         });
     };
 
+    handle_button_change = e => {
+        e.preventDefault();
+
+        // TODO: Handle logic to make buttons active/inactive
+        let value;
+
+        value = e.target["value"] === "goalie";
+
+        this.setState(prevstate => {
+            const newState = { ...prevstate };
+            newState["is_goalie"] = value;
+            return newState;
+        });
+    };
+
+    goalie_is_active() {
+        if (this.state["is_goalie"] === true) {
+            return "btn btn-outline-secondary active"
+        }
+        return "btn btn-outline-secondary"
+
+    };
+
+    renter_is_active() {
+        if (this.state["is_goalie"] === false) {
+            return "btn btn-outline-secondary active"
+        }
+        return "btn btn-outline-secondary"
+    };
+
     handle_register(e, data) {
         e.preventDefault();
 
         let body = {
-            "username": data["username"],
-            "password": data["password"],
-            "email": data["email"]
+            "username": this.state["username"],
+            "password": this.state["password"],
+            "email": this.state["email"],
+            "is_goalie": this.state["is_goalie"]
         };
         let url = "http://localhost:8000/user/";
         fetch(url, {
@@ -43,38 +75,71 @@ class RegistrationForm extends React.Component {
     }
 
     render() {
-        // TODO: Add "Is Goalie" checkbox
         return (
-            <form onSubmit={e => this.handle_register(e, this.state)}>
-                <h4>Register</h4>
-                <label htmlFor="username">Username</label>
-                <input
-                    type="text"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.handle_change}
-                />
-                <br></br>
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.handle_change}
-                />
-                <br></br>
-                <label htmlFor="email">Email</label>
-                <input
-                    type="text"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.handle_change}
-                />
-                <br></br>
+            <div className="container">
+                <form onSubmit={e => this.handle_register(e)}>
+                    <h1>Register</h1>
+                    <div className="input-group form-group">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text"><i className="fas fa-user"></i></span>
+                        </div>
+                        <input
+                            type="text"
+                            name="username"
+                            value={this.state.username}
+                            onChange={this.handle_change}
+                            placeholder="Username"
+                            className="form-control col-md-3"
+                        />
+                    </div>
+                    <div className="form-group input-group">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text"><i className="fas fa-key"></i></span>
+                        </div>
+                        <input
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.handle_change}
+                            placeholder="Password"
+                            className="form-control col-md-3"
+                        />
+                    </div>
+                    <div className="form-group input-group">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text"><i className="fas fa-envelope"></i></span>
+                        </div>
+                        <input
+                            type="text"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.handle_change}
+                            placeholder="Email"
+                            className="form-control col-md-3"
+                        />
+                    </div>
 
-                <input type="submit" />
+                    <div className="form-group btn-group" role="group">
+                        <button type="button"
+                                className={this.goalie_is_active()}
+                                value="goalie"
+                                onClick={this.handle_button_change}>
+                            I'm a Goalie
+                        </button>
+                        <button type="button"
+                                className={this.renter_is_active()}
+                                value="renter"
+                                onClick={this.handle_button_change}>
+                            I Need a Goalie
+                        </button>
+                    </div>
 
-            </form>
+                    <div className="form-group">
+                        <input className="btn btn-primary" type="submit" />
+                    </div>
+
+                </form>
+            </div>
         );
     }
 }

@@ -24,11 +24,10 @@ class PostedGames extends React.Component {
             .then(json => {
                 this.setState({ games: json });
                 this.updateRows();
-                // this.render()
             });
     }
 
-    updateRows = () => {
+    updateRows = (id_to_skip) => {
         let table = [];
 
         if (this.state['games'] !== null) {
@@ -36,12 +35,13 @@ class PostedGames extends React.Component {
             for (let i = 0; i < this.state['games'].length; i++) {
                 let game_id = this.state['games'][i]['user'];
 
-                if (parseInt(user_id) === game_id) {
+                if (parseInt(user_id) === game_id && game_id !== id_to_skip) {
                     table[i] = [];
                     table[i].push(this.state['games'][i]['user']);
                     table[i].push(this.state['games'][i]['skill_level']);
                     table[i].push(this.state['games'][i]['location']);
                     table[i].push(this.state['games'][i]['game_time']);
+
                     if (this.state['games'][i]['goalie_one'] !== null) {
                         table[i].push("Yes");
                     }
@@ -50,7 +50,8 @@ class PostedGames extends React.Component {
                     }
 
                     table[i].push(<button value={this.state['games'][i]['id']}
-                                          onClick={this.handle_cancel}>Cancel</button>);
+                                          onClick={this.handle_cancel}
+                                          className="btn btn-secondary">Cancel</button>);
                 }
             }
         }
@@ -60,6 +61,7 @@ class PostedGames extends React.Component {
             'rows': table
         })
     };
+
 
     handle_cancel(e) {
         let val = e.target["value"];
@@ -80,10 +82,9 @@ class PostedGames extends React.Component {
                             }
                         })
                             .then(res => {
-                                console.log(res.status)
+                                console.log(res.status);
                             })
                             .catch(res => res.status)
-
                     }
                 },
                 {
@@ -106,7 +107,10 @@ class PostedGames extends React.Component {
         ];
 
         return (
-            <DataTable headings={headings} rows={this.state['rows']}/>
+            <div className="container">
+                <h1>My Games</h1>
+                <DataTable headings={headings} rows={this.state['rows']}/>
+            </div>
         );
     }
 }

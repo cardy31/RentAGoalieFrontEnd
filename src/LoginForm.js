@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component {
     state = {
-        username: 'cardy',
-        password: 'cheese123'
+        username: '',
+        password: ''
     };
 
     handle_change = e => {
@@ -19,27 +19,38 @@ class LoginForm extends React.Component {
 
     render() {
         return (
+            <div className="container">
             <form onSubmit={e => this.props.handle_login(e, this.state)}>
-                <h4>Login</h4>
-                <label htmlFor="username">Username</label>
-                <input
-                    type="text"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.handle_change}
-                />
-                <br></br>
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.handle_change}
-                />
-                <br></br>
-                <input type="submit" />
-
+                <h1>Login</h1>
+                <div className="input-group form-group">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text"><i className="fas fa-user"></i></span>
+                    </div>
+                    <input
+                        type="text"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.handle_change}
+                        placeholder="Username"
+                        className="form-control col-md-3"
+                    />
+                </div>
+                <div className="input-group form-group">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text"><i className="fas fa-key"></i></span>
+                    </div>
+                    <input
+                        type="password"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.handle_change}
+                        placeholder="Password"
+                        className="form-control col-md-3"
+                    />
+                </div>
+                <input className="btn btn-primary" type="submit" />
             </form>
+            </div>
         );
     }
 }

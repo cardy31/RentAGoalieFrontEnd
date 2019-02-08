@@ -12,12 +12,12 @@ class Renter extends React.Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-light">
-                    <ul className="nav navbar-nav">
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/mygames">My Games</Link></li>
-                        <li><Link to="/gameform">Post Game</Link></li>
-                        <li onClick={this.props.handle_logout}><Link to="/">Logout</Link></li>
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/mygames">My Games</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/gameform">Post a Game</Link></li>
+                        <li className="nav-item"  onClick={this.props.handle_logout}><Link className="nav-link" to="/">Logout</Link></li>
 
                     </ul>
                 </nav>

@@ -74,9 +74,12 @@ class App extends Component {
                 })
                     .then(res => res.json())
                     .then(json => {
+                        console.log("JSON here:");
                         console.log(json[0]);
+                        console.log("ID in there is: ", json[0]["id"]);
                         this.setState({user_id: json[0]['id']});
                         localStorage.setItem('user_id', json[0]['id']);
+                        console.log("ID here is: ", localStorage.getItem("user_id"));
                         let url = 'http://localhost:8000/game/';
                         fetch(url, {
                             method: 'GET',
@@ -87,7 +90,7 @@ class App extends Component {
                             .then(res => res.json())
                             .then(json => {
                                 localStorage.setItem('games', json);
-                                let url = 'http://localhost:8000/profile/' + json[0]['id'] + '/';
+                                let url = 'http://localhost:8000/profile/' + localStorage.getItem("user_id") + '/';
                                 fetch(url, {
                                     method: 'GET',
                                     headers: {
@@ -98,8 +101,14 @@ class App extends Component {
                                     .then(json => {
                                         localStorage.setItem('is_goalie', json['is_goalie']);
                                         console.log(json['is_goalie']);
-                                        console.log(json);
-                                        this.render()
+                                        // console.log(typeof )
+                                        console.log("TRUTH: ", localStorage.getItem("is_goalie") === "true");
+                                        if (localStorage.getItem("is_goalie") === "true") {
+                                            this.props.history.push("/findagame")
+                                        }
+                                        else {
+                                            this.props.history.push("/mygames")
+                                        }
                                     });
                             })
                     })
@@ -108,11 +117,8 @@ class App extends Component {
 
 
     render() {
-        console.log(this.state);
-        console.log(localStorage.getItem("token"));
-
         if (this.state['logged_in'] === true) {
-            if (localStorage.getItem('is_goalie') === 'true'){
+            if (localStorage.getItem('is_goalie') === "true"){
                 return (
                     <div>
                         <Goalie handle_logout={this.handle_logout}/>
@@ -131,11 +137,11 @@ class App extends Component {
         else {
             return (
                 <div>
-                    <nav className="navbar navbar-light">
-                        <ul className="nav navbar-nav">
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/login">Login</Link></li>
-                            <li><Link to="/register">Register</Link></li>
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>
                         </ul>
                     </nav>
 

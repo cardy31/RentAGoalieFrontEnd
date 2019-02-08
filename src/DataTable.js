@@ -51,7 +51,7 @@ export default class DataTable extends React.Component {
         const tbodyMarkup = rows.map(this.renderRow);
 
         return (
-            <table className="Table">
+            <table className="table table-striped">
                 <thead>{theadMarkup}</thead>
                 <tbody>{tbodyMarkup}</tbody>
             </table>

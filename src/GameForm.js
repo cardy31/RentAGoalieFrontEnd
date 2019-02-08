@@ -1,28 +1,15 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import GOOGLE_MAPS_KEY from "./Keys.js"
+// import MapUpdate from "./MapComponent"
 
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { withRouter } from "react-router";
-
-let mapsUrl = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=" + GOOGLE_MAPS_KEY;
-
-const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-    <GoogleMap googleMapURL={mapsUrl}
-                  loadingElement={<div style={{ height: `100%` }} />}
-                  containerElement={<div style={{ height: `400px` }} />}
-                  mapElement={<div style={{ height: `100%` }} />}
-                  defaultCenter={{ lat: -34.397, lng: 150.644 }}
-                  defaultZoom={8}
-                  isMarkerShown={false}/>
-));
 
 class GameForm extends React.Component {
     state = {
         date: new Date(),
-        location: "Kitchener",
+        location: "",
         skill_level: 1,
         center: {
             lat: 43.4516395,
@@ -30,7 +17,8 @@ class GameForm extends React.Component {
         },
         zoom: 15,
         isMarkerShown: false,
-        two_goalies_needed: false
+        two_goalies_needed: false,
+        location_error: false
     };
 
 
@@ -65,7 +53,6 @@ class GameForm extends React.Component {
 
     render_location(e) {
         e.preventDefault();
-        console.log("Rendering location");
         let addressString = this.state["location"];
         addressString = addressString.replace(" ", "+");
         console.log(addressString);
@@ -74,21 +61,36 @@ class GameForm extends React.Component {
         fetch(urlString)
             .then(res => res.json())
             .then(json => {
-                console.log("Address info");
-                console.log(json);
-                console.log(json.results);
-                console.log(json.results[0]["formatted_address"]);
+                try {
+                    console.log("Address info");
+                    console.log(json);
+                    console.log(json.results);
+                    console.log(json.results[0]["formatted_address"]);
 
-                this.setState(prevstate => {
-                    const newState = { ...prevstate };
-                    newState["location"] = json.results[0]["formatted_address"];
-                    newState["center"] = json.results[0]["geometry"]["location"];
-                    newState["isMarkerShown"] = true;
-                    return newState;
-                });
-                console.log("Changed location");
-                console.log(this.state);
-                this.render();
+                    this.setState(prevstate => {
+                        const newState = { ...prevstate };
+                        newState["location"] = json.results[0]["formatted_address"];
+                        newState["center"] = json.results[0]["geometry"]["location"];
+                        newState["isMarkerShown"] = true;
+                        newState["zoom"] = 17;
+                        newState["location_error"] = false;
+                        return newState;
+                    });
+                    if (this.state["location_error"] === true) {
+                        this.setState(prevstate => {
+                            const newState = { ...prevstate };
+                            newState["location_error"] = false;
+                            return newState
+                        })
+                    }
+                }
+                catch (e) {
+                    this.setState(prevstate => {
+                        const newState = { ...prevstate };
+                        newState["location_error"] = true;
+                        return newState
+                    })
+                }
             });
     }
 
@@ -121,60 +123,85 @@ class GameForm extends React.Component {
             })
     }
 
+    setLocationClass() {
+        if (this.state["location_error"] === true) {
+            console.log("setting", this.state["location_error"] === true)
+            return "is-invalid"
+        }
+        return ""
+    }
+
 
     render() {
 
+        console.log(this.state["location_error"]);
 
-
+        const error = this.state["location_error"]
+            ? <div className="invalid-feedback">
+                Sorry, that location couldn't be found. Try adding more detail.
+            </div> : "";
         return (
+            <div className="container">
+            <h1>Post a Game</h1>
             <form onSubmit={e => this.handle_post(e, this.state)}>
-                <h4>Post a Game</h4>
-                <label htmlFor="location">Location&nbsp;</label>
-                <input
-                    type="text"
-                    name="location"
-                    value={this.state.location}
-                    onChange={this.handle_change}
-                />
-                <button onClick={e => this.render_location(e)}>Lookup</button>
+                <div className="form-group">
+                    <label htmlFor="location">Location&nbsp;</label>
+                    <div className="input-group">
+                        <input
+                            type="text"
+                            name="location"
+                            value={this.state.location}
+                            onChange={this.handle_change}
+                            className={"form-control col-md-5 " + this.setLocationClass()}
+                            placeholder="Arena Location"
+                        />
+                        <div className="input-group-append">
+                            <button className="btn btn-secondary"
+                                    onClick={e => this.render_location(e)}
+                                    type="button">Lookup</button>
+                        </div>
+                        {error}
+                    </div>
+                </div>
 
-                <MyMapComponent
-                    googleMapURL={mapsUrl}
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `400px` }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
-                    center={this.state["center"]}
-                    zoom={this.state["zoom"]}
-                    isMarkerShown={true}
-                />
-                <br></br>
+                <div className="form-group">
+                    <label htmlFor="date">Date&nbsp;</label>
+                    <div className="input-group">
+                        <DatePicker selected={this.state.date}
+                                    onChange={this.handle_date_change}
+                                    name="date"
+                                    showTimeSelect
+                                    dateFormat="Pp"
+                                    dropdownMode="scroll"
+                        />
 
-                <label htmlFor="date">Date&nbsp;
-                <DatePicker selected={this.state.date}
-                            onChange={this.handle_date_change}
-                            name="date"
-                            showTimeSelect
-                            dateFormat="Pp"
-                            dropdownMode="scroll"
-                />
-                </label>
-                <br></br>
-                <label htmlFor="skill_level">Skill Level&nbsp;
-                <select value={this.state.skill_level} onChange={this.handle_skill_change}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                </label>
-                <br></br>
-                <label htmlFor="two_goalies_needed">Two Goalies Needed&nbsp;
-                <input type="checkbox" defaultValue={this.state.two_goalies_needed} onChange={this.handle_change}/>
-                </label>
-                <br></br>
-                <input type="submit"/>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="skill_level">Skill Level&nbsp;
+                        <div className="input-group">
+                            <select value={this.state.skill_level} onChange={this.handle_skill_change}>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </label>
+                </div>
+
+                {/*<div className="form-group">*/}
+                    {/*<label htmlFor="two_goalies_needed">Two Goalies Needed&nbsp;*/}
+                        {/*<div className="input-group">*/}
+                            {/*<input type="checkbox" defaultValue={this.state.two_goalies_needed} onChange={this.handle_change}/>*/}
+                        {/*</div>*/}
+                    {/*</label>*/}
+                {/*</div>*/}
+
+                <input className="btn btn-primary" type="submit"/>
             </form>
+            </div>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import DataTable from './DataTable';
+import {confirmAlert} from "react-confirm-alert";
 
 class AcceptedGames extends React.Component {
     constructor(props) {
@@ -27,6 +28,45 @@ class AcceptedGames extends React.Component {
             });
     }
 
+    handle_cancel(e) {
+        let val = e.target["value"];
+
+        const options = {
+            title: 'Cancelling Attendance',
+            message: 'Are you sure you want to cancel?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        let body = {
+                            "game": parseInt(val),
+                            "goalie": parseInt(localStorage.getItem("user_id"))
+                        };
+                        let urlString = "http://localhost:8000/unapply/";
+                        console.log(urlString);
+                        fetch(urlString, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type':'application/json',
+                                Authorization: `Token ${localStorage.getItem('token')}`
+                            },
+                            body: JSON.stringify(body)
+                        })
+                            .then(res => {
+                                console.log(res.status);
+                            })
+                            .catch(res => res.status)
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => null
+                }
+            ],
+        };
+        confirmAlert(options);
+    }
+
     updateRows = () => {
         let table = [];
 
@@ -42,7 +82,9 @@ class AcceptedGames extends React.Component {
                 table[i].push(this.state['games'][i]['skill_level']);
                 table[i].push(this.state['games'][i]['location']);
                 table[i].push(this.state['games'][i]['game_time']);
-                table[i].push(<button>Cancel</button>);
+                table[i].push(<button value={this.state['games'][i]['id']}
+                                      onClick={this.handle_cancel}
+                                      className="btn btn-secondary">Cancel</button>);
             }
         }
 
@@ -58,11 +100,14 @@ class AcceptedGames extends React.Component {
             'Skill Level',
             'Location',
             'Time',
-            'Play!'
+            'Cancel'
         ];
 
         return (
-            <DataTable headings={headings} rows={this.state['rows']} />
+            <div className="container">
+                <h1>Accepted Games</h1>
+                <DataTable headings={headings} rows={this.state['rows']} />
+            </div>
         );
     }
 }
