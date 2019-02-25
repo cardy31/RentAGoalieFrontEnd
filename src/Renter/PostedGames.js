@@ -1,7 +1,10 @@
 import React from 'react';
-import DataTable from './DataTable';
+import DataTable from '../DataTable/DataTable';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
+import { isEmpty } from '../_helpers/IsEmpty'
+import {Redirect, withRouter} from "react-router";
+
 
 class PostedGames extends React.Component {
     constructor(props) {
@@ -30,7 +33,7 @@ class PostedGames extends React.Component {
     updateRows = (id_to_skip) => {
         let table = [];
 
-        if (this.state['games'] !== null) {
+        if (this.state['games'] !== null && !isEmpty(this.state['games'])) {
             let user_id = localStorage.getItem('user_id');
             for (let i = 0; i < this.state['games'].length; i++) {
                 let game_id = this.state['games'][i]['user'];
@@ -97,6 +100,13 @@ class PostedGames extends React.Component {
     }
 
     render() {
+        if (!localStorage.getItem('token')) {
+            return (
+                <Redirect to="/"/>
+            )
+        }
+
+        console.log("Rendering in PostedGames");
         let headings = [
                 'User',
                 'Skill Level',
@@ -107,12 +117,17 @@ class PostedGames extends React.Component {
         ];
 
         return (
-            <div className="container">
-                <h1>My Games</h1>
-                <DataTable headings={headings} rows={this.state['rows']}/>
+            <div>
+                {this.props.nav}
+            <div>
+                <div className="container">
+                    <h1>My Games</h1>
+                    <DataTable headings={headings} rows={this.state['rows']}/>
+                </div>
+            </div>
             </div>
         );
     }
 }
 
-export default PostedGames;
+export default withRouter(PostedGames);

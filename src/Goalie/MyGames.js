@@ -1,13 +1,15 @@
 import React from 'react';
-import DataTable from './DataTable';
+import DataTable from '../DataTable/DataTable';
 import {confirmAlert} from "react-confirm-alert";
+import { isEmpty } from '../_helpers/IsEmpty'
+import {Redirect} from "react-router";
 
-class AcceptedGames extends React.Component {
+class MyGames extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            'games': this.props.games,
+            'games': {},
             'rows': []
         };
     }
@@ -72,7 +74,7 @@ class AcceptedGames extends React.Component {
 
         let id = parseInt(localStorage.getItem('user_id'));
 
-        if (this.state['games'] !== null) {
+        if (this.state['games'] !== null && !isEmpty(this.state['games'])) {
             for (let i = 0; i < this.state['games'].length; i++) {
                 if (this.state['games'][i]['goalie_one'] !== id) {
                     continue;
@@ -95,6 +97,12 @@ class AcceptedGames extends React.Component {
     };
 
     render() {
+        if (!localStorage.getItem('token')) {
+            return (
+                <Redirect to="/"/>
+            )
+        }
+
         let headings = [
             'User',
             'Skill Level',
@@ -104,12 +112,15 @@ class AcceptedGames extends React.Component {
         ];
 
         return (
+            <div>
+                {this.props.nav}
             <div className="container">
-                <h1>Accepted Games</h1>
+                <h1>My Games</h1>
                 <DataTable headings={headings} rows={this.state['rows']} />
+            </div>
             </div>
         );
     }
 }
 
-export default AcceptedGames;
+export default MyGames;

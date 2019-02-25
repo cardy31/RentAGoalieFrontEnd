@@ -1,11 +1,10 @@
 import React from 'react';
 
-class RegistrationForm extends React.Component {
+class ProfileForm extends React.Component {
     state = {
         username: '',
         password: '',
         email: '',
-        is_goalie: true
     };
 
     handle_change = e => {
@@ -33,20 +32,20 @@ class RegistrationForm extends React.Component {
         });
     };
 
-    goalie_is_active() {
-        if (this.state["is_goalie"] === true) {
-            return "btn btn-outline-secondary active"
-        }
-        return "btn btn-outline-secondary"
-
-    };
-
-    renter_is_active() {
-        if (this.state["is_goalie"] === false) {
-            return "btn btn-outline-secondary active"
-        }
-        return "btn btn-outline-secondary"
-    };
+    // goalie_is_active() {
+    //     if (this.state["is_goalie"] === true) {
+    //         return "btn btn-outline-secondary active"
+    //     }
+    //     return "btn btn-outline-secondary"
+    //
+    // };
+    //
+    // renter_is_active() {
+    //     if (this.state["is_goalie"] === false) {
+    //         return "btn btn-outline-secondary active"
+    //     }
+    //     return "btn btn-outline-secondary"
+    // };
 
     handle_register(e, data) {
         e.preventDefault();
@@ -55,7 +54,6 @@ class RegistrationForm extends React.Component {
             "username": this.state["username"],
             "password": this.state["password"],
             "email": this.state["email"],
-            "is_goalie": this.state["is_goalie"]
         };
         let url = "http://localhost:8000/user/";
         fetch(url, {
@@ -69,7 +67,7 @@ class RegistrationForm extends React.Component {
             .then(json => {
                 console.log(json);
 
-                this.props.history.push("/login");
+                this.props.history.push("/Login");
             })
 
     }
@@ -119,20 +117,20 @@ class RegistrationForm extends React.Component {
                         />
                     </div>
 
-                    <div className="form-group btn-group" role="group">
-                        <button type="button"
-                                className={this.goalie_is_active()}
-                                value="goalie"
-                                onClick={this.handle_button_change}>
-                            I'm a Goalie
-                        </button>
-                        <button type="button"
-                                className={this.renter_is_active()}
-                                value="renter"
-                                onClick={this.handle_button_change}>
-                            I Need a Goalie
-                        </button>
-                    </div>
+                    {/*<div className="form-group btn-group" role="group">*/}
+                    {/*<button type="button"*/}
+                    {/*className={this.goalie_is_active()}*/}
+                    {/*value="goalie"*/}
+                    {/*onClick={this.handle_button_change}>*/}
+                    {/*I'm a Goalie*/}
+                    {/*</button>*/}
+                    {/*<button type="button"*/}
+                    {/*className={this.renter_is_active()}*/}
+                    {/*value="renter"*/}
+                    {/*onClick={this.handle_button_change}>*/}
+                    {/*I Need a Goalie*/}
+                    {/*</button>*/}
+                    {/*</div>*/}
 
                     <div className="form-group">
                         <input className="btn btn-primary" type="submit" />
@@ -144,4 +142,4 @@ class RegistrationForm extends React.Component {
     }
 }
 
-export default RegistrationForm;
+export default ProfileForm;

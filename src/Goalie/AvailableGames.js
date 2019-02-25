@@ -1,13 +1,16 @@
 import React from 'react';
-import DataTable from './DataTable';
+import DataTable from '../DataTable/DataTable';
 import {confirmAlert} from "react-confirm-alert";
+import { isEmpty } from '../_helpers/IsEmpty'
+import { Redirect } from 'react-router'
+
 
 class AvailableGames extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            'games': this.props.games,
+            'games': {},
             'rows': []
         };
     }
@@ -27,11 +30,26 @@ class AvailableGames extends React.Component {
                 this.updateRows();
             });
     }
+    //
+    // getGames = () => {
+    //     // This will let the page update after initial render
+    //     let url = 'http://localhost:8000/game/';
+    //     fetch(url, {
+    //         method: 'GET',
+    //         headers: {
+    //             Authorization: `Token ${localStorage.getItem('token')}`
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(json => {
+    //             this.setState({games:json});
+    //         })
+    // };
 
     updateRows = () => {
         let table = [];
 
-        if (this.state['games'] !== null) {
+        if (this.state['games'] !== null && !isEmpty(this.state['games'])) {
             for (let i = 0; i < this.state['games'].length; i++) {
                 if (this.state['games'][i]['goalie_one'] !== null) {
                     continue;
@@ -96,6 +114,12 @@ class AvailableGames extends React.Component {
     }
 
     render() {
+        if (!localStorage.getItem('token')) {
+            return (
+                <Redirect to="/"/>
+            )
+        }
+
         let headings = [
             'User',
             'Skill Level',
@@ -105,9 +129,12 @@ class AvailableGames extends React.Component {
         ];
 
         return (
-            <div className="container">
-                <h1>Find a Game</h1>
-                <DataTable headings={headings} rows={this.state['rows']} />
+            <div>
+                {this.props.nav}
+                <div className="container">
+                    <h1>Find a Game</h1>
+                    <DataTable headings={headings} rows={this.state['rows']} />
+                </div>
             </div>
         );
     }

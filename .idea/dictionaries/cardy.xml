@@ -4,9 +4,17 @@
       <w>acceptedgames</w>
       <w>availablegames</w>
       <w>axios</w>
+      <w>findagame</w>
+      <w>firstname</w>
+      <w>freegames</w>
       <w>gameform</w>
+      <w>lastname</w>
       <w>mygames</w>
+      <w>mynav</w>
       <w>navbar</w>
+      <w>postagame</w>
+      <w>postedgames</w>
+      <w>prevstate</w>
     </words>
   </dictionary>
 </component>

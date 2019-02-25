@@ -1,25 +1,31 @@
 import React from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import GOOGLE_MAPS_KEY from "./Keys.js"
+import GOOGLE_MAPS_KEY from "../Keys.js"
 // import MapUpdate from "./MapComponent"
+import {Redirect, withRouter} from "react-router";
 
-import { withRouter } from "react-router";
 
 class GameForm extends React.Component {
-    state = {
-        date: new Date(),
-        location: "",
-        skill_level: 1,
-        center: {
-            lat: 43.4516395,
-            lng: -80.49253369999997
-        },
-        zoom: 15,
-        isMarkerShown: false,
-        two_goalies_needed: false,
-        location_error: false
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            date: new Date(),
+            location: "",
+            skill_level: 1,
+            center: {
+                lat: 43.4516395,
+                lng: -80.49253369999997
+            },
+            zoom: 15,
+            isMarkerShown: false,
+            two_goalies_needed: false,
+            location_error: false
+        };
+    }
+
+
 
 
     handle_change = e => {
@@ -119,13 +125,13 @@ class GameForm extends React.Component {
             .then(res => res.json())
             .then(json => {
                 console.log(json);
-                this.props.history.push("/mygames");
+                this.props.history.push("/postagame");
             })
     }
 
     setLocationClass() {
         if (this.state["location_error"] === true) {
-            console.log("setting", this.state["location_error"] === true)
+            console.log("setting", this.state["location_error"] === true);
             return "is-invalid"
         }
         return ""
@@ -133,74 +139,81 @@ class GameForm extends React.Component {
 
 
     render() {
+        if (!localStorage.getItem('token')) {
+            return (
+                <Redirect to="/"/>
+            )
+        }
 
-        console.log(this.state["location_error"]);
-
-        const error = this.state["location_error"]
+        const location_error = this.state["location_error"]
             ? <div className="invalid-feedback">
                 Sorry, that location couldn't be found. Try adding more detail.
             </div> : "";
+
         return (
-            <div className="container">
-            <h1>Post a Game</h1>
-            <form onSubmit={e => this.handle_post(e, this.state)}>
-                <div className="form-group">
-                    <label htmlFor="location">Location&nbsp;</label>
-                    <div className="input-group">
-                        <input
-                            type="text"
-                            name="location"
-                            value={this.state.location}
-                            onChange={this.handle_change}
-                            className={"form-control col-md-5 " + this.setLocationClass()}
-                            placeholder="Arena Location"
-                        />
-                        <div className="input-group-append">
-                            <button className="btn btn-secondary"
-                                    onClick={e => this.render_location(e)}
-                                    type="button">Lookup</button>
-                        </div>
-                        {error}
-                    </div>
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="date">Date&nbsp;</label>
-                    <div className="input-group">
-                        <DatePicker selected={this.state.date}
-                                    onChange={this.handle_date_change}
-                                    name="date"
-                                    showTimeSelect
-                                    dateFormat="Pp"
-                                    dropdownMode="scroll"
-                        />
-
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="skill_level">Skill Level&nbsp;
+            <div>
+                {this.props.nav}
+                <div className="container">
+                <h1>Post a Game</h1>
+                <form onSubmit={e => this.handle_post(e, this.state)}>
+                    <div className="form-group">
+                        <label htmlFor="location">Location&nbsp;</label>
                         <div className="input-group">
-                            <select value={this.state.skill_level} onChange={this.handle_skill_change}>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
+                            <input
+                                type="text"
+                                name="location"
+                                value={this.state.location}
+                                onChange={this.handle_change}
+                                className={"form-control col-md-5 " + this.setLocationClass()}
+                                placeholder="Arena Location"
+                            />
+                            <div className="input-group-append">
+                                <button className="btn btn-secondary"
+                                        onClick={e => this.render_location(e)}
+                                        type="button">Lookup</button>
+                            </div>
+                            {location_error}
                         </div>
-                    </label>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="date">Date&nbsp;</label>
+                        <div className="input-group">
+                            <DatePicker selected={this.state.date}
+                                        onChange={this.handle_date_change}
+                                        name="date"
+                                        showTimeSelect
+                                        dateFormat="Pp"
+                                        dropdownMode="scroll"
+                            />
+
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="skill_level">Skill Level&nbsp;
+                            <div className="input-group">
+                                <select value={this.state.skill_level} onChange={this.handle_skill_change}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+
+                    {/*<div className="form-group">*/}
+                        {/*<label htmlFor="two_goalies_needed">Two Goalies Needed&nbsp;*/}
+                            {/*<div className="input-group">*/}
+                                {/*<input type="checkbox" defaultValue={this.state.two_goalies_needed} onChange={this.handle_change}/>*/}
+                            {/*</div>*/}
+                        {/*</label>*/}
+                    {/*</div>*/}
+
+                    <input className="btn btn-primary" type="submit"/>
+                </form>
                 </div>
-
-                {/*<div className="form-group">*/}
-                    {/*<label htmlFor="two_goalies_needed">Two Goalies Needed&nbsp;*/}
-                        {/*<div className="input-group">*/}
-                            {/*<input type="checkbox" defaultValue={this.state.two_goalies_needed} onChange={this.handle_change}/>*/}
-                        {/*</div>*/}
-                    {/*</label>*/}
-                {/*</div>*/}
-
-                <input className="btn btn-primary" type="submit"/>
-            </form>
             </div>
         );
     }

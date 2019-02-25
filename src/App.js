@@ -1,43 +1,50 @@
 import { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
-import LoginForm from './LoginForm';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+import LoginForm from './Login/LoginForm';
 import React from 'react';
-import RegistrationForm from "./RegistrationForm";
-import { withRouter } from "react-router";
+import RegistrationForm from "./Register/RegistrationForm";
+// import { withRouter } from "react-router";
 import PropTypes from "prop-types";
-import Home from "./Home";
-import Goalie from "./Goalie";
-import Renter from "./Renter";
+import HomePage from "./HomePage/HomePage";
+import AvailableGames from './Goalie/AvailableGames';
+import MyGames from './Goalie/MyGames';
+// import { PrivateRoute } from "./_components";
+import GameForm from "./Renter/GameForm";
+import PostedGames from "./Renter/PostedGames";
+import Navbar from "./Navbar/Navbar"
 
 
-const renderMergedProps = (component, ...rest) => {
-    const finalProps = Object.assign({}, ...rest);
-    return (
-        React.createElement(component, finalProps)
-    );
-};
-
-const PropsRoute = ({ component, ...rest }) => {
-    return (
-        <Route {...rest} render={routeProps => {
-            return renderMergedProps(component, routeProps, rest);
-        }}/>
-    );
-};
+// const renderMergedProps = (component, ...rest) => {
+//     const finalProps = Object.assign({}, ...rest);
+//     return (
+//         React.createElement(component, finalProps)
+//     );
+// };
+//
+// const PropsRoute = ({ component, ...rest }) => {
+//     return (
+//         <Route {...rest} render={routeProps => {
+//             return renderMergedProps(component, routeProps, rest);
+//         }}/>
+//     );
+// };
 
 /* App component */
 class App extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             displayed_form: '',
             logged_in: !!localStorage.getItem('token'),
             username: '',
-            user_id: -1,
+            user_id: 0,
             match: PropTypes.object.isRequired,
             location: PropTypes.object.isRequired,
-            history: PropTypes.object.isRequired
+            history: PropTypes.object.isRequired,
         };
+
+        this.updateNavbar = this.updateNavbar.bind(this)
     }
 
     handle_logout = () => {
@@ -45,114 +52,98 @@ class App extends Component {
         localStorage.removeItem('is_goalie');
         localStorage.removeItem('user_id');
         this.setState({ logged_in: false, username: '' });
+        this.updateNavbar();
     };
 
-    handle_login = (e, data) => {
-        e.preventDefault();
-        let username = data.username;
-        fetch('http://localhost:8000/api-token-auth/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            .then(json => {
-                localStorage.setItem('token', json.token);
-                console.log(json.token);
-                this.setState({
-                    logged_in: true,
-                    displayed_form: '',
-                    username: username
-                });
-                fetch('http://localhost:8000/user/', {
-                    method: 'GET',
-                    headers: {
-                        Authorization: `Token ${localStorage.getItem('token')}`
-                    },
-                })
-                    .then(res => res.json())
-                    .then(json => {
-                        console.log("JSON here:");
-                        console.log(json[0]);
-                        console.log("ID in there is: ", json[0]["id"]);
-                        this.setState({user_id: json[0]['id']});
-                        localStorage.setItem('user_id', json[0]['id']);
-                        console.log("ID here is: ", localStorage.getItem("user_id"));
-                        let url = 'http://localhost:8000/game/';
-                        fetch(url, {
-                            method: 'GET',
-                            headers: {
-                                Authorization: `Token ${localStorage.getItem('token')}`
-                            },
-                        })
-                            .then(res => res.json())
-                            .then(json => {
-                                localStorage.setItem('games', json);
-                                let url = 'http://localhost:8000/profile/' + localStorage.getItem("user_id") + '/';
-                                fetch(url, {
-                                    method: 'GET',
-                                    headers: {
-                                        Authorization: `Token ${localStorage.getItem('token')}`
-                                    },
-                                })
-                                    .then(res => res.json())
-                                    .then(json => {
-                                        localStorage.setItem('is_goalie', json['is_goalie']);
-                                        console.log(json['is_goalie']);
-                                        // console.log(typeof )
-                                        console.log("TRUTH: ", localStorage.getItem("is_goalie") === "true");
-                                        if (localStorage.getItem("is_goalie") === "true") {
-                                            this.props.history.push("/findagame")
-                                        }
-                                        else {
-                                            this.props.history.push("/mygames")
-                                        }
-                                    });
-                            })
-                    })
-            })
-    }; // End handle_login
-
+    updateNavbar() {
+        if (localStorage.getItem('token')) {
+            this.setState(prevstate => {
+                const newState = { ...prevstate };
+                newState["logged_in"] = true;
+                return newState;
+            });
+        }
+        console.log(this.state)
+    };
 
     render() {
-        if (this.state['logged_in'] === true) {
-            if (localStorage.getItem('is_goalie') === "true"){
-                return (
-                    <div>
-                        <Goalie handle_logout={this.handle_logout}/>
-                    </div>
-                )
-            }
-            else {
-                return (
-                    <div>
-                        <Renter handle_logout={this.handle_logout}/>
-                    </div>
-                )
-            }
-        }
-        // Not logged in
-        else {
-            return (
+        // console.log("Rendering in app");
+        // console.log(this.state)
+        // if (this.state['logged_in'] === true) {
+        //     console.log("Logged in");
+        //     if (localStorage.getItem('is_goalie') === "true"){
+        //         return (
+        //             <div>
+        //                 <Goalie handle_logout={this.handle_logout}/>
+        //             </div>
+        //         )
+        //     }
+        //     else {
+        //         return (
+        //             <div>
+        //                 <Renter handle_logout={this.handle_logout}/>
+        //             </div>
+        //         )
+        //     }
+        // }
+        // // Not logged in
+        // else {
+        //     return (
+        //         <div>
+        //             <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        //                 <ul className="navbar-nav mr-auto">
+        //                     <li className="nav-item"><Link className="nav-link" to="/">HomePage</Link></li>
+        //                     <li className="nav-item"><Link className="nav-link" to="/Login">Login</Link></li>
+        //                     <li className="nav-item"><Link className="nav-link" to="/Register">Register</Link></li>
+        //                 </ul>
+        //             </nav>
+        //
+        //             <Route exact path="/" component={HomePage}/>
+        //             <PropsRoute path="/Login" component={LoginForm}
+        //                         // successful_login={this.successful_login}
+        //                         // failed_login={this.state["failed_login"]}
+        //             />
+        //             <PropsRoute path="/Register" component={RegistrationForm}/>
+        //
+        //         </div>
+        //     )
+        // }
+
+        let mynav =
+            <Navbar logged_in={this.state["logged_in"]}
+                    is_goalie={localStorage.getItem("is_goalie") === "true"}
+                    logout={this.handle_logout}
+            />;
+
+        return (
+            <Router>
                 <div>
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>
-                        </ul>
-                    </nav>
-
-                    <Route exact path="/" component={Home}/>
-                    <PropsRoute path="/login" component={LoginForm} handle_login={this.handle_login}/>
-                    <PropsRoute path="/register" component={RegistrationForm}/>
-
+                        <Route exact path="/"
+                               render={(props) => <HomePage {...props}
+                                                            nav={mynav}/>}/>
+                        <Route path="/login"
+                               render={(props) => <LoginForm {...props}
+                                                             update={this.updateNavbar}
+                                                             nav={mynav}/>}/>
+                        <Route path="/register"
+                               render={(props) => <RegistrationForm {...props}
+                                                                    nav={mynav}/>}/>
+                        <Route path="/availablegames"
+                               render={(props) => <AvailableGames {...props}
+                                                                  nav={mynav}/>}/>
+                        <Route path="/mygames"
+                               render={(props) => <MyGames {...props}
+                                                           nav={mynav}/>}/>
+                        <Route path="/postagame"
+                               render={(props) => <GameForm {...props}
+                                                            nav={mynav}/>}/>
+                        <Route path="/postedgames"
+                               render={(props) => <PostedGames {...props}
+                                                               nav={mynav}/>}/>
                 </div>
-            )
-        }
+            </Router>
+        )
     }
 }
 
-export default withRouter(App);
+export default App;
