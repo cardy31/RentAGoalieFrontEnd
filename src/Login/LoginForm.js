@@ -8,16 +8,11 @@ class LoginForm extends React.Component {
         super(props);
         
         try {
-            console.log(props.location.state["register_show"]);
+            console.log(props.location.state["register_show"])
         }
         catch (e) {
             props.location.state = {"register_show": false}
         }
-
-        console.log("Props: ", props);
-        console.log(props.location);
-        // props.location.state = {register_show: false}
-        // console.log(props.location);
 
         this.state = {
             username: 'cardy',
@@ -26,7 +21,6 @@ class LoginForm extends React.Component {
             message: this.props.message,
             register_show: this.props.location.state.register_show
         };
-        console.log(this.props)
     }
 
     handle_change = e => {
@@ -80,11 +74,16 @@ class LoginForm extends React.Component {
                             .then(res => res.json())
                             .then(json => {
                                 localStorage.setItem('is_goalie', json['is_goalie']);
-                                console.log(localStorage.getItem('is_goalie'));
                                 if (localStorage.getItem("is_goalie") === "true") {
-                                    this.props.history.push("/availablegames")
+                                    this.props.history.push({
+                                        pathname: "/findagame",
+                                        state: {login_check: true}
+                                    })
                                 } else {
-                                    this.props.history.push("/postagame")
+                                    this.props.history.push({
+                                        pathname: "/postagame",
+                                        state: {login_check: true}
+                                    })
                                 }
                             });
                     })
@@ -93,14 +92,12 @@ class LoginForm extends React.Component {
 
     setLoginClass() {
         if (this.state["failed_login"] === true) {
-            console.log("setting", this.state["failed_login"] === true);
             return "is-invalid"
         }
         return ""
     }
 
     setRegisterAlert() {
-        console.log('State: ', this.state);
         if (this.state["register_show"] === true) {
             return <div className="alert alert-success" role="alert">
                 Registration successful! Please activate your account using the link we emailed you, then login here.
@@ -159,7 +156,7 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-    nav: PropTypes.func.isRequired
+    nav: PropTypes.object.isRequired
 };
 
 export default withRouter(LoginForm);

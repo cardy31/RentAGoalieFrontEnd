@@ -5,13 +5,22 @@ import { isEmpty } from '../_helpers/IsEmpty'
 import { Redirect } from 'react-router'
 
 
-class AvailableGames extends React.Component {
+class FindAGame extends React.Component {
     constructor(props) {
         super(props);
 
+        try {
+            console.log(props.location.state["login_check"]);
+        }
+        catch (e) {
+            props.location.state = {"login_check": false}
+        }
+
         this.state = {
-            'games': {},
-            'rows': []
+            games: {},
+            rows: [],
+            login_check: this.props.location.state.login_check,
+            profile_not_updated: false
         };
     }
 
@@ -24,13 +33,30 @@ class AvailableGames extends React.Component {
         })
             .then(res => res.json())
             .then(json => {
-                console.log("GAMES");
+                console.log("Games");
                 console.log(json);
                 this.setState({ games: json });
                 this.updateRows();
             });
+        let url = 'http://localhost:8000/profile/' + localStorage.getItem('user_id') + '/';
+        fetch(url, {
+            headers: {
+                Authorization: `Token ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(json => {
+                console.log("Profile");
+                console.log(json);
+                let lat = json["latitude"];
+                let long = json["longitude"];
+                if (lat === 0 && long === 0) {
+                    this.setState({profile_not_updated: true});
+                    localStorage.setItem('unknown_goalie', 'true');
+                }
+            });
     }
-    //
+
     // getGames = () => {
     //     // This will let the page update after initial render
     //     let url = 'http://localhost:8000/game/';
@@ -120,6 +146,12 @@ class AvailableGames extends React.Component {
             )
         }
 
+        if (this.state["profile_not_updated"] === true) {
+            return (
+                <Redirect to="/profile"/>
+            )
+        }
+
         let headings = [
             'User',
             'Skill Level',
@@ -140,4 +172,4 @@ class AvailableGames extends React.Component {
     }
 }
 
-export default AvailableGames;
+export default FindAGame;

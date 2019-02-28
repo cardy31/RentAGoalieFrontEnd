@@ -2,7 +2,6 @@ import React from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import GOOGLE_MAPS_KEY from "../Keys.js"
-// import MapUpdate from "./MapComponent"
 import {Redirect, withRouter} from "react-router";
 
 
@@ -24,9 +23,6 @@ class GameForm extends React.Component {
             location_error: false
         };
     }
-
-
-
 
     handle_change = e => {
         console.log(e);

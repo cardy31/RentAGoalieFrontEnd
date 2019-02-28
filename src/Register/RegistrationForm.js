@@ -18,7 +18,7 @@ class RegistrationForm extends React.Component {
         password_error: '',
         email: '',
         failed_email: false,
-        email_error: ''
+        email_error: '',
     };
 
     handle_change = e => {
@@ -27,21 +27,6 @@ class RegistrationForm extends React.Component {
         this.setState(prevstate => {
             const newState = { ...prevstate };
             newState[name] = value;
-            return newState;
-        });
-    };
-
-    handle_button_change = e => {
-        e.preventDefault();
-
-        // TODO: Handle logic to make buttons active/inactive
-        let value;
-
-        value = e.target["value"] === "goalie";
-
-        this.setState(prevstate => {
-            const newState = { ...prevstate };
-            newState["is_goalie"] = value;
             return newState;
         });
     };
@@ -67,7 +52,6 @@ class RegistrationForm extends React.Component {
         return ""
     }
 
-    // TODO: Put in some password checks that are decent but not annoying
     setPasswordClass() {
         if (this.state["failed_password"] === true) {
             return "is-invalid"
@@ -145,6 +129,8 @@ class RegistrationForm extends React.Component {
             "username": this.state["username"],
             "password": this.state["password"],
             "email": this.state["email"],
+            "first_name": this.state["firstname"],
+            "last_name": this.state["lastname"]
         };
         let url = "http://localhost:8000/user/";
         fetch(url, {
@@ -156,32 +142,28 @@ class RegistrationForm extends React.Component {
         })
             .then(res => res.json())
             .then(json => {
-                console.log(json);
-                // TODO: Check for errors in submission
-                // let flag = false;
-                // if (json.hasOwnProperty("username") && json["username"][0] === "A user with that username already exists.") {
-                //     this.setState({
-                //         failed_user: true,
-                //         user_error: "Sorry, that username is taken. Please try a different one."
-                //     });
-                //     flag = true
-                // }
-                //
-                // if (json.hasOwnProperty("email") && json["email"][0] === "Enter a valid email address.") {
-                //     this.setState({
-                //         failed_email: true,
-                //         email_error: "Sorry, that email is invalid or already in use. If you're having issues with registering, please email support@rentagoalie.com for help."
-                //     });
-                //     flag = true
-                // }
-
-                // if (!flag) {
-                if (true) {
-                    // TODO: Pass a prop to login that puts a banner saying that registration worked
-                    this.props.history.push({
-                        pathname: "/Login",
-                        state: {register_show: true}
+                let flag = false;
+                if (json.hasOwnProperty("username") && json["username"][0] === "A user with that username already exists.") {
+                    this.setState({
+                        failed_user: true,
+                        user_error: "Sorry, that username is taken. Please try a different one."
                     });
+                    flag = true
+                }
+
+                if (json.hasOwnProperty("email") && json["email"][0] === "Enter a valid email address.") {
+                    this.setState({
+                        failed_email: true,
+                        email_error: "Sorry, that email is invalid or already in use. If you're having issues with registering, please email support@rentagoalie.com for help."
+                    });
+                    flag = true
+                }
+
+                if (!flag) {
+                            this.props.history.push({
+                                pathname: "/Login",
+                                state: {register_show: true}
+                            });
                 }
             })
 
@@ -211,86 +193,86 @@ class RegistrationForm extends React.Component {
         return (
             <div>
                 {this.props.nav}
-            <div className="container">
-                <form onSubmit={e => this.handle_register(e)}>
-                    <h1>Register</h1>
-                    <div className="input-group form-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text"><i className="fas fa-user"></i></span>
+                <div className="container">
+                    <form onSubmit={e => this.handle_register(e)}>
+                        <h1>Register</h1>
+                        <div className="input-group form-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"><i className="fas fa-user"> </i></span>
+                            </div>
+                            <input
+                                type="text"
+                                name="username"
+                                value={this.state.username}
+                                onChange={this.handle_change}
+                                placeholder="Username"
+                                className={"form-control col-md-3 " + this.setUsernameClass()}
+                            />
+                            {username_error}
                         </div>
-                        <input
-                            type="text"
-                            name="username"
-                            value={this.state.username}
-                            onChange={this.handle_change}
-                            placeholder="Username"
-                            className={"form-control col-md-3 " + this.setUsernameClass()}
-                        />
-                        {username_error}
-                    </div>
-                    <div className="input-group form-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text"><i className="fas fa-hockey-puck"></i></span>
+                        <div className="input-group form-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"><i className="fas fa-hockey-puck"> </i></span>
+                            </div>
+                            <input
+                                type="text"
+                                name="firstname"
+                                value={this.state.firstname}
+                                onChange={this.handle_change}
+                                placeholder="Firstname"
+                                className={"form-control col-md-3 " + this.setFirstnameClass()}
+                            />
+                            {firstname_error}
                         </div>
-                        <input
-                            type="text"
-                            name="firstname"
-                            value={this.state.firstname}
-                            onChange={this.handle_change}
-                            placeholder="Firstname"
-                            className={"form-control col-md-3 " + this.setFirstnameClass()}
-                        />
-                        {firstname_error}
-                    </div>
-                    <div className="input-group form-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text"><i className="fas fa-hockey-puck"></i></span>
+                        <div className="input-group form-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"><i className="fas fa-hockey-puck"> </i></span>
+                            </div>
+                            <input
+                                type="text"
+                                name="lastname"
+                                value={this.state.lastname}
+                                onChange={this.handle_change}
+                                placeholder="Lastname"
+                                className={"form-control col-md-3 " + this.setLastnameClass()}
+                            />
+                            {lastname_error}
                         </div>
-                        <input
-                            type="text"
-                            name="lastname"
-                            value={this.state.lastname}
-                            onChange={this.handle_change}
-                            placeholder="Lastname"
-                            className={"form-control col-md-3 " + this.setLastnameClass()}
-                        />
-                        {lastname_error}
-                    </div>
-                    <div className="form-group input-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text"><i className="fas fa-key"></i></span>
+                        <div className="form-group input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"><i className="fas fa-key"> </i></span>
+                            </div>
+                            <input
+                                type="password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.handle_change}
+                                placeholder="Password"
+                                className={"form-control col-md-3 " + this.setPasswordClass()}
+                            />
+                            {password_error}
                         </div>
-                        <input
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.handle_change}
-                            placeholder="Password"
-                            className={"form-control col-md-3 " + this.setPasswordClass()}
-                        />
-                        {password_error}
-                    </div>
-                    <div className="form-group input-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text"><i className="fas fa-envelope"></i></span>
+                        <div className="form-group input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"><i className="fas fa-envelope"> </i></span>
+                            </div>
+                            <input
+                                type="text"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.handle_change}
+                                placeholder="Email"
+                                className={"form-control col-md-3 " + this.setEmailClass()}
+                            />
+                            {email_error}
                         </div>
-                        <input
-                            type="text"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.handle_change}
-                            placeholder="Email"
-                            className={"form-control col-md-3 " + this.setEmailClass()}
-                        />
-                        {email_error}
-                    </div>
 
-                    <div className="form-group">
-                        <input className="btn btn-primary" type="submit" />
-                    </div>
+                        <div className="form-group">
+                            <input className="btn btn-primary" type="submit" />
+                        </div>
 
-                </form>
-            </div>
+                    </form>
+                </div>
             </div>
         );
     }

@@ -3,12 +3,11 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import LoginForm from './Login/LoginForm';
 import React from 'react';
 import RegistrationForm from "./Register/RegistrationForm";
-// import { withRouter } from "react-router";
+import Profile from "./Register/Profile";
 import PropTypes from "prop-types";
 import HomePage from "./HomePage/HomePage";
-import AvailableGames from './Goalie/AvailableGames';
+import FindAGame from './Goalie/FindAGame';
 import MyGames from './Goalie/MyGames';
-// import { PrivateRoute } from "./_components";
 import GameForm from "./Renter/GameForm";
 import PostedGames from "./Renter/PostedGames";
 import Navbar from "./Navbar/Navbar"
@@ -67,48 +66,6 @@ class App extends Component {
     };
 
     render() {
-        // console.log("Rendering in app");
-        // console.log(this.state)
-        // if (this.state['logged_in'] === true) {
-        //     console.log("Logged in");
-        //     if (localStorage.getItem('is_goalie') === "true"){
-        //         return (
-        //             <div>
-        //                 <Goalie handle_logout={this.handle_logout}/>
-        //             </div>
-        //         )
-        //     }
-        //     else {
-        //         return (
-        //             <div>
-        //                 <Renter handle_logout={this.handle_logout}/>
-        //             </div>
-        //         )
-        //     }
-        // }
-        // // Not logged in
-        // else {
-        //     return (
-        //         <div>
-        //             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        //                 <ul className="navbar-nav mr-auto">
-        //                     <li className="nav-item"><Link className="nav-link" to="/">HomePage</Link></li>
-        //                     <li className="nav-item"><Link className="nav-link" to="/Login">Login</Link></li>
-        //                     <li className="nav-item"><Link className="nav-link" to="/Register">Register</Link></li>
-        //                 </ul>
-        //             </nav>
-        //
-        //             <Route exact path="/" component={HomePage}/>
-        //             <PropsRoute path="/Login" component={LoginForm}
-        //                         // successful_login={this.successful_login}
-        //                         // failed_login={this.state["failed_login"]}
-        //             />
-        //             <PropsRoute path="/Register" component={RegistrationForm}/>
-        //
-        //         </div>
-        //     )
-        // }
-
         let mynav =
             <Navbar logged_in={this.state["logged_in"]}
                     is_goalie={localStorage.getItem("is_goalie") === "true"}
@@ -128,18 +85,21 @@ class App extends Component {
                         <Route path="/register"
                                render={(props) => <RegistrationForm {...props}
                                                                     nav={mynav}/>}/>
-                        <Route path="/availablegames"
-                               render={(props) => <AvailableGames {...props}
-                                                                  nav={mynav}/>}/>
+                        <Route path="/findagame"
+                               render={(props) => <FindAGame {...props}
+                                                              nav={mynav}/>}/>
                         <Route path="/mygames"
                                render={(props) => <MyGames {...props}
-                                                           nav={mynav}/>}/>
+                                                            nav={mynav}/>}/>
                         <Route path="/postagame"
                                render={(props) => <GameForm {...props}
-                                                            nav={mynav}/>}/>
+                                                             nav={mynav}/>}/>
                         <Route path="/postedgames"
                                render={(props) => <PostedGames {...props}
-                                                               nav={mynav}/>}/>
+                                                                nav={mynav}/>}/>
+                        <Route path="/profile"
+                               render={(props) => <Profile {...props}
+                                                                nav={mynav}/>}/>
                 </div>
             </Router>
         )

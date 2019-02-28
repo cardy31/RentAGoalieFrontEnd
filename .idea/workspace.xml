@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea082e23-b3d1-46d6-ad34-1aac91a6268a" name="Default Changelist" comment="So many changes!">
-      <change afterPath="$PROJECT_DIR$/src/DataTable/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DatePicker/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Goalie/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HomePage/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Login/LoginForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Login/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Navbar/Navbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Navbar/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Register/RegistrationForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Register/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Renter/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/_components/PrivateRoute.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/_components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/_helpers/IsEmpty.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/_helpers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/cardy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/cardy.xml" afterDir="false" />
+    <list default="true" id="ea082e23-b3d1-46d6-ad34-1aac91a6268a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AcceptedGames.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Goalie/MyGames.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AvailableGames.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Goalie/AvailableGames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTable/Cell.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataTable.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTable/DataTable.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataTable/DataTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DatePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatePicker/DatePicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renter/GameForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Goalie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/HomePage/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PostedGames.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renter/PostedGames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RegistrationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Register/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Renter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Goalie/AvailableGames.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Goalie/FindAGame.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Goalie/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Goalie/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/LoginForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Navbar/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navbar/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Register/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Register/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Register/RegistrationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Register/RegistrationForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Renter/GameForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renter/GameForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Renter/PostedGames.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renter/PostedGames.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,14 +50,14 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.45833334">
+    <splitter split-orientation="horizontal" split-proportion="0.44805655">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Register/RegistrationForm.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-63">
-                  <caret line="253" column="45" selection-start-line="253" selection-start-column="45" selection-end-line="253" selection-end-column="45" />
+                <state relative-caret-position="100">
+                  <caret line="214" column="106" selection-start-line="214" selection-start-column="106" selection-end-line="214" selection-end-column="106" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -88,11 +65,44 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Goalie/MyGames.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="779">
+                  <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Navbar/Navbar.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="120">
-                  <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
+                <state relative-caret-position="194">
+                  <caret line="36" selection-start-line="36" selection-end-line="36" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="420">
+                  <caret line="28" selection-start-line="28" selection-end-line="28" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Register/Profile.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="23">
+                  <caret line="206" selection-start-line="206" selection-end-line="206" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -103,20 +113,37 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/App.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-264">
-                  <caret line="66" column="6" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="6" />
+                <state relative-caret-position="311">
+                  <caret line="76" column="21" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
                   <folding>
                     <element signature="e#0#34#0" expanded="true" />
-                    <element signature="e#285#320#0" expanded="true" />
-                    <element signature="e#508#549#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Navbar/index.js">
-              <provider selected="true" editor-type-id="text-editor" />
+            <entry file="file://$PROJECT_DIR$/src/Renter/GameForm.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="59">
+                  <caret line="116" column="73" lean-forward="true" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="73" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Renter/PostedGames.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1290">
+                  <caret line="86" column="49" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="49" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
             </entry>
           </file>
         </leaf>
@@ -126,10 +153,23 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Login/LoginForm.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="82" column="79" lean-forward="true" selection-start-line="82" selection-start-column="79" selection-end-line="82" selection-end-column="79" />
+                <state relative-caret-position="150">
+                  <caret line="10" column="19" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Goalie/FindAGame.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="630">
+                  <caret line="42" column="22" lean-forward="true" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                    <marker date="1551315612763" expanded="true" signature="5234:5342" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -153,6 +193,8 @@
       <find>render</find>
       <find>onGoogleApiLoaded</find>
       <find>localhost</find>
+      <find>center</find>
+      <find>console</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -166,8 +208,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Homepage.js" />
-        <option value="$PROJECT_DIR$/src/Nav.js" />
         <option value="$PROJECT_DIR$/src/Cell.js" />
         <option value="$PROJECT_DIR$/src/DataTable.css" />
         <option value="$PROJECT_DIR$/src/LocationPicker.js" />
@@ -208,15 +248,17 @@
         <option value="$PROJECT_DIR$/src/_components/PrivateRoute.js" />
         <option value="$PROJECT_DIR$/src/HomePage/HomePage.js" />
         <option value="$PROJECT_DIR$/src/Navbar/Routes.js" />
-        <option value="$PROJECT_DIR$/src/Register/Profile.js" />
         <option value="$PROJECT_DIR$/src/Goalie/MyGames.js" />
         <option value="$PROJECT_DIR$/src/Goalie/AvailableGames.js" />
         <option value="$PROJECT_DIR$/src/Renter/GameForm.js" />
-        <option value="$PROJECT_DIR$/src/Renter/PostedGames.js" />
+        <option value="$PROJECT_DIR$/src/_components/LocationPicker.js" />
+        <option value="$PROJECT_DIR$/src/Goalie/FindAGame.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/Register/RegistrationForm.js" />
         <option value="$PROJECT_DIR$/src/Login/LoginForm.js" />
         <option value="$PROJECT_DIR$/src/Navbar/Navbar.js" />
+        <option value="$PROJECT_DIR$/src/Renter/PostedGames.js" />
+        <option value="$PROJECT_DIR$/src/Register/Profile.js" />
+        <option value="$PROJECT_DIR$/src/Register/RegistrationForm.js" />
       </list>
     </option>
   </component>
@@ -230,8 +272,8 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1680" />
-    <option name="height" value="1050" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -241,6 +283,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,6 +295,12 @@
               <item name="rent_a_goalie" type="b2602c69:ProjectViewProjectNode" />
               <item name="rent_a_goalie" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rent_a_goalie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rent_a_goalie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="_components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="rent_a_goalie" type="b2602c69:ProjectViewProjectNode" />
@@ -297,13 +346,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.console.LAST_STATE" value="true" />
+    <property name="database.console.LAST_STATE" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -399,7 +447,8 @@
       <workItem from="1550124840162" duration="3375000" />
       <workItem from="1550952911322" duration="753000" />
       <workItem from="1550989035791" duration="1066000" />
-      <workItem from="1551040138897" duration="8272000" />
+      <workItem from="1551040138897" duration="11641000" />
+      <workItem from="1551293002802" duration="15679000" />
     </task>
     <task id="LOCAL-00001" summary="Commiting this mess before making some big changes">
       <created>1543983845285</created>
@@ -443,11 +492,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549661124788</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Basically reorganized the whole thing">
+      <created>1551063122567</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1551063122567</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174395000" />
+    <option name="totallyTimeSpent" value="193443000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -462,24 +518,24 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7256372" visible="true" weight="0.17948718" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.724924" visible="true" weight="0.13614164" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" sideWeight="0.27436283" side_tool="true" visible="true" weight="0.17948718" />
+      <window_info id="npm" order="2" sideWeight="0.275076" side_tool="true" visible="true" weight="0.13614164" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32970297" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31938776" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32857144" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.16831683" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
+      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" weight="0.32857144" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32574257" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.31632653" />
       <window_info anchor="bottom" id="TypeScript" order="12" />
-      <window_info active="true" anchor="bottom" id="Database Console" order="13" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Database Console" order="13" weight="0.32871288" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -569,16 +625,10 @@
     <MESSAGE value="All of the things. In no way should this be on commit, but here we are." />
     <MESSAGE value="Tweaks to game form, hide API keys better." />
     <MESSAGE value="So many changes!" />
-    <option name="LAST_COMMIT_MESSAGE" value="So many changes!" />
+    <MESSAGE value="Basically reorganized the whole thing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basically reorganized the whole thing" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="5035" column="4" selection-start-line="5035" selection-start-column="4" selection-end-line="5035" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env" />
     <entry file="file://$PROJECT_DIR$/node_modules/google-map-react/lib/index.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -638,13 +688,6 @@
     <entry file="file://$PROJECT_DIR$/src/Homepage.js" />
     <entry file="file://$PROJECT_DIR$/src/LocationPicker.js" />
     <entry file="file://$PROJECT_DIR$/src/Nav.js" />
-    <entry file="das://743a8aaa-7c98-4565-8109-62bf739eac1e/schema/main/table/Rentals_profile">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -671,13 +714,6 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
@@ -775,13 +811,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Register/Profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2130">
-          <caret line="142" column="1" lean-forward="true" selection-start-line="142" selection-start-column="1" selection-end-line="142" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_helpers/IsEmpty.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -814,31 +843,78 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Navbar/Routes.js" />
-    <entry file="file://$PROJECT_DIR$/src/Goalie/MyGames.js">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="8" />
+        <state relative-caret-position="420">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Navbar/index.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_components/LocationPicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="77" selection-end-column="1" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Goalie/AvailableGames.js">
+    <entry file="file://$PROJECT_DIR$/src/Goalie/MyGames.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="121" column="8" lean-forward="true" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
+        <state relative-caret-position="779">
+          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1550163992129" expanded="true" signature="4148:4256" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://743a8aaa-7c98-4565-8109-62bf739eac1e/schema/main/table/Rentals_profile">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Goalie/FindAGame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="22" lean-forward="true" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <marker date="1551315612763" expanded="true" signature="5234:5342" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="76" column="21" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Navbar/Navbar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Renter/GameForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1668">
-          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        <state relative-caret-position="59">
+          <caret line="116" column="73" lean-forward="true" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="73" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -847,33 +923,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Renter/PostedGames.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="107" column="8" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
+        <state relative-caret-position="1290">
+          <caret line="86" column="49" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="49" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Navbar/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
+    <entry file="file://$PROJECT_DIR$/src/Login/LoginForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-264">
-          <caret line="66" column="6" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="6" />
+        <state relative-caret-position="150">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="19" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
-            <element signature="e#285#320#0" expanded="true" />
-            <element signature="e#508#549#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Login/LoginForm.js">
+    <entry file="file://$PROJECT_DIR$/src/Register/Profile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="82" column="79" lean-forward="true" selection-start-line="82" selection-start-column="79" selection-end-line="82" selection-end-column="79" />
+        <state relative-caret-position="23">
+          <caret line="206" selection-start-line="206" selection-end-line="206" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -882,18 +953,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Register/RegistrationForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-63">
-          <caret line="253" column="45" selection-start-line="253" selection-start-column="45" selection-end-line="253" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Navbar/Navbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
+        <state relative-caret-position="100">
+          <caret line="214" column="106" selection-start-line="214" selection-start-column="106" selection-end-line="214" selection-end-column="106" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

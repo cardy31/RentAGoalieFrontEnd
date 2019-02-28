@@ -77,7 +77,6 @@ class PostedGames extends React.Component {
                     label: 'Yes',
                     onClick: () => {
                         let urlString = "http://localhost:8000/game/" + val + "/";
-                        console.log(urlString);
                         fetch(urlString, {
                             method: 'DELETE',
                             headers: {
@@ -85,7 +84,7 @@ class PostedGames extends React.Component {
                             }
                         })
                             .then(res => {
-                                console.log(res.status);
+                                console.log("Temp");
                             })
                             .catch(res => res.status)
                     }
@@ -106,7 +105,6 @@ class PostedGames extends React.Component {
             )
         }
 
-        console.log("Rendering in PostedGames");
         let headings = [
                 'User',
                 'Skill Level',
